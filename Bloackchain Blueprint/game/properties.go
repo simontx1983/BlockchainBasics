@@ -1,4 +1,5 @@
-package main
+package Player
+
 
 import (
 	"fmt"
@@ -10,7 +11,7 @@ type Property struct {
 	PurchaseCost int    // cost to buy property
 	NodeCost     int    // cost to buy a node
 	Rent         []int  // Rent cost
-	Owner        *Player
+	Owner        *game.Player
 	NodeCount    int // number of nodes owned
 }
 
@@ -85,7 +86,7 @@ func main() {
 		Owner:        nil,
 		NodeCount:    0,
 	}
-	Lido DAO := Property{
+	Lido := Property{
 		Name:         "Lido DAO",
 		Position:     7,
 		Owner:        nil,

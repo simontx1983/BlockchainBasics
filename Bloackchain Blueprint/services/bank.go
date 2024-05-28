@@ -5,8 +5,8 @@ import (
 )
 
 type Transaction struct {
-	Sender   *Player
-	Receiver *Player
+	Sender   *game.Player
+	Receiver *game.Player
 	Amount   int
 }
 

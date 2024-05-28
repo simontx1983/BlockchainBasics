@@ -90,7 +90,7 @@ func (p *Player) BuyProperty(pd *PropertyDeed) (int, error) {
 }
 
 // pay200sats pays 200 satoshis to the player.
-func (p *Player) pay20000sats() {
+func (p *Player) pay2000sats() {
 	t := Transaction{
 		Sender:   nil,
 		Receiver: p,
