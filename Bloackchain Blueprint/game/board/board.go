@@ -1,43 +1,54 @@
 package game
 
-type Board struct {
-	BoardSpace [48]Square
-}
+import (
+	"fmt"
+	"math/rand"
 
-type Square struct {
-}
-
-const (
-	BuildableProperty int = iota
-	DAO
-	MiningPool
-	CommunityNode
-	SmartContract
-	TransactionFee
-	HODL
-	SlashedCards
+	"github.com/simontx1983/Blockchain_Blueprint/game"
 )
 
-func GetPropertyType(number int) string {
-	var propType string
-	switch number {
-	case BuildableProperty:
-		propType = "Property"
-	case DAO:
-		propType = "DAO"
-	case MiningPool:
-		propType = "Mining Pool"
-	case CommunityNode:
-		propType = "Community Node"
-	case SmartContract:
-		propType = "Smart Contract"
-	case TransactionFee:
-		propType = "Transaction Fees"
-	case HODL:
-		propType = "HODL"
-	case SlashedCards:
-		propType = "Missed Block"
+const (
+	boardSize        = 48
+	maxPropertyValue = 1500
+)
 
+// Property represents a property on the game board
+type Property struct {
+	Name        string
+	Value       int
+	Owner       *game.Player
+	QuestionIdx int
+}
+
+// Board represents the game board
+type Board struct {
+	Properties []Property
+}
+
+// NewBoard creates a new game board
+func NewBoard() *Board {
+	board := &Board{
+		Properties: make([]Property, boardSize),
 	}
-	return propType
+
+	// Initialize board properties
+	for i := 0; i < boardSize; i++ {
+		board.Properties[i] = Property{
+			Name:        fmt.Sprintf("Property %d", i+1),
+			Value:       rand.Intn(maxPropertyValue) + 1,
+			QuestionIdx: rand.Intn(maxQuestions),
+		}
+	}
+
+	return board
+}
+
+// GetProperty returns the property at the given position
+func (b *Board) GetProperty(position int) *Property {
+	return &b.Properties[position]
+}
+
+// SetPropertyOwner sets the owner of a property
+func (b *Board) SetPropertyOwner(position int, owner *game.Player) {
+	b.Properties[position].Owner = owner
 }
